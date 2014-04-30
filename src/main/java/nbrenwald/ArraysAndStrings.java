@@ -35,6 +35,8 @@ public class ArraysAndStrings {
 
 
   }
+  
+  /* Exercise 1-4 */
 
   public static String replaceSubstring(String a, String b, int trueLength) {
     char[] aArray = a.toCharArray();
@@ -61,5 +63,33 @@ public class ArraysAndStrings {
     }
 
     return String.valueOf(aArray);
+  }
+  
+  /* Exercise 1-5 */
+  public static String compress(String uncompressed){
+    // Only upper and lower case ascii characters. need to keep the original ordering.
+    if(uncompressed.length()>2){//a string with fewer than 3 chars could not be improved 
+      char[] uncompressedArray = uncompressed.toCharArray();
+      StringBuilder sb = new StringBuilder(uncompressedArray.length*2); //area to test
+      char previousChar=uncompressedArray[0];
+      int previousCount=1;
+      
+      for(int i =1; i< uncompressedArray.length; i++){
+        if(uncompressedArray[i]==previousChar){
+          previousCount++;
+        }
+        else{
+          //do the write
+          sb.append(previousChar);
+          sb.append(previousCount);
+          previousChar = uncompressedArray[i];
+          previousCount=1;
+        }
+      }
+      sb.append(previousChar);
+      sb.append(previousCount);
+      if(sb.length()<uncompressed.length())return sb.toString();
+    }
+    return uncompressed;
   }
 }
