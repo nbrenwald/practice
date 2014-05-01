@@ -8,7 +8,7 @@ public class ArraysAndStrings {
   public static boolean isPermutation(String a, String b) {
     if (a != null && b != null && (a.length() == b.length())) {
       // One option, count chars in each one - perhaps in a hash map.
-      // Order the chars in both string, then walk allong checking. Order n log n
+      // Order the chars in both string, then walk along checking. Order n log n
       // If chars are ascii, we could do counting sort quite easily with array of 127 elements
       // we could hold an array of 127 chars, we do one loop to count characters for a, one to
       // decrement for b,
@@ -91,5 +91,10 @@ public class ArraysAndStrings {
       if(sb.length()<uncompressed.length())return sb.toString();
     }
     return uncompressed;
+  }
+  
+  /* Exercise 1-6 */
+  public static int[][] rotateSquareMatrix(int[][] squareMatrix){
+    return null;
   }
 }
