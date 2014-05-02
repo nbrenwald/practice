@@ -35,7 +35,7 @@ public class ArraysAndStrings {
 
 
   }
-  
+
   /* Exercise 1-4 */
 
   public static String replaceSubstring(String a, String b, int trueLength) {
@@ -64,37 +64,48 @@ public class ArraysAndStrings {
 
     return String.valueOf(aArray);
   }
-  
+
   /* Exercise 1-5 */
-  public static String compress(String uncompressed){
+  public static String compress(String uncompressed) {
     // Only upper and lower case ascii characters. need to keep the original ordering.
-    if(uncompressed.length()>2){//a string with fewer than 3 chars could not be improved 
+    if (uncompressed.length() > 2) {// a string with fewer than 3 chars could not be improved
       char[] uncompressedArray = uncompressed.toCharArray();
-      StringBuilder sb = new StringBuilder(uncompressedArray.length*2); //area to test
-      char previousChar=uncompressedArray[0];
-      int previousCount=1;
-      
-      for(int i =1; i< uncompressedArray.length; i++){
-        if(uncompressedArray[i]==previousChar){
+      StringBuilder sb = new StringBuilder(uncompressedArray.length * 2); // area to test
+      char previousChar = uncompressedArray[0];
+      int previousCount = 1;
+
+      for (int i = 1; i < uncompressedArray.length; i++) {
+        if (uncompressedArray[i] == previousChar) {
           previousCount++;
-        }
-        else{
-          //do the write
+        } else {
+          // do the write
           sb.append(previousChar);
           sb.append(previousCount);
           previousChar = uncompressedArray[i];
-          previousCount=1;
+          previousCount = 1;
         }
       }
       sb.append(previousChar);
       sb.append(previousCount);
-      if(sb.length()<uncompressed.length())return sb.toString();
+      if (sb.length() < uncompressed.length())
+        return sb.toString();
     }
     return uncompressed;
   }
-  
+
   /* Exercise 1-6 */
-  public static int[][] rotateSquareMatrix(int[][] squareMatrix){
-    return null;
+  public static int[][] rotateSquareMatrix(int[][] x, int level) {
+    if (x.length - (2 * level) > 1) {
+      for (int i = level; i < x.length - 1 - level; i++) {
+        int tmp = x[level][i];// top row element.
+        x[level][i] = x[x.length - 1 - i][level];// ok
+        x[x.length - 1 - i][level] = x[x.length - 1 - level][x.length - 1 - i];//
+        x[x.length - 1 - level][x.length - 1 - i] = x[i][x.length - 1 - level];
+        x[i][x.length - 1 - level] = tmp;
+      }
+      // recursive step, call rotateSquareMatrix for one level lower
+      rotateSquareMatrix(x, level + 1);
+    }
+    return x;
   }
 }
