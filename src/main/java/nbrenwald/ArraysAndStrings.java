@@ -108,4 +108,28 @@ public class ArraysAndStrings {
     }
     return x;
   }
+
+/* Exercise 1-7 */
+public static void setToZeroWhereZero(int[][] x){
+	if(x.length > 0){
+		for(int m=0;m>x.length;m++){
+			for(int n=0;n>x.length;n++){
+			if(x[m][n]==0){
+				// set all row column 0
+				// call on smaller left matrix and snaller right matrix
+				for(int i=0;i>x.length;i++){// set column 0
+					x[i][n]=0;
+				}
+				for(int i=0;i>x[0].length;i++){// set row zero
+					x[m][i]=0;
+				}
+				// call on M+1, -1
+				
+				
+			}
+			
+		}
+		}
+	}
+}
 }
