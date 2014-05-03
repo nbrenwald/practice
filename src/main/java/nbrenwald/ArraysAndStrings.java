@@ -110,10 +110,14 @@ public class ArraysAndStrings {
   }
 
 /* Exercise 1-7 */
-public static void setToZeroWhereZero(int[][] x){
-	if(x.length > 0){
-		for(int m=0;m>x.length;m++){
-			for(int n=0;n>x.length;n++){
+// to run call on int[][] x = {{1,1,1,1}{1,0,1,1}{1,1,1,1}{1,1,1,1}{1,1,1,0}};
+// setToZeroWhereZero(x,0,0,x[0].length-1)
+public static void setToZeroWhereZero(int[][] x, int startRow, int startColumn, int endColumn){
+// in recursive case, we will always be attempting to go to the final row
+	if(startRow < x.length && startColumn <= endColumn){
+	// if this doesnt hold, then we are either already finished the last row, or left and right matrices are already finished.
+		for(int m=startRow;m<x.length;m++){
+			for(int n=startColumn;n<=endColumn;n++){
 			if(x[m][n]==0){
 				// set all row column 0
 				// call on smaller left matrix and snaller right matrix
@@ -123,9 +127,10 @@ public static void setToZeroWhereZero(int[][] x){
 				for(int i=0;i>x[0].length;i++){// set row zero
 					x[m][i]=0;
 				}
-				// call on M+1, -1
-				
-				
+				// call on m+1, n-1 and m+1, n+1
+				setToZeroWhereZero(x,m+1,startColumn, n-1);
+				setToZeroWhereZero(x,m+1,n+1, endColumn);
+								
 			}
 			
 		}
