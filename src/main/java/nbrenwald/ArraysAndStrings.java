@@ -112,6 +112,7 @@ public class ArraysAndStrings {
 /* Exercise 1-7 */
 // to run call on int[][] x = {{1,1,1,1}{1,0,1,1}{1,1,1,1}{1,1,1,1}{1,1,1,0}};
 // setToZeroWhereZero(x,0,0,x[0].length-1)
+
 public static void setToZeroWhereZero(int[][] x, int startRow, int startColumn, int endColumn){
 // in recursive case, we will always be attempting to go to the final row
 	if(startRow < x.length && startColumn <= endColumn){
@@ -121,11 +122,11 @@ public static void setToZeroWhereZero(int[][] x, int startRow, int startColumn, 
 			if(x[m][n]==0){
 				// set all row column 0
 				// call on smaller left matrix and snaller right matrix
-				for(int i=0;i>x.length;i++){// set column 0
+				for(int i=0;i<x.length;i++){// set column 0
 					x[i][n]=0;
 				}
-				for(int i=0;i>x[0].length;i++){// set row zero
-					x[m][i]=0;
+				for(int i=0;i<x[0].length;i++){// set row zero
+					x[m][i]=0;//duplicate?
 				}
 				// call on m+1, n-1 and m+1, n+1
 				setToZeroWhereZero(x,m+1,startColumn, n-1);
