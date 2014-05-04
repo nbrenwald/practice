@@ -38,6 +38,15 @@ public class ArraysAndStringsTest {
     ArraysAndStrings.setToZeroWhereZero(x);
     assertTrue(compareMatrix(x,y));
   }
+
+@Test
+  public void testIsRotation() {
+    String s1 = "waterbottle";
+    String s2 = "erbottlewat"
+    String s3 = "rbottlewaet"
+    assertTrue(ArraysAndString.isRotation(s1,s2));
+    assertFalse(ArraysAndString.isRotation(s1,s3));
+  }
   
   private static boolean compareMatrix(int[][]a, int[][] b){
     for(int i = 0; i< a.length; i++){

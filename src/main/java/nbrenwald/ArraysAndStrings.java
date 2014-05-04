@@ -189,4 +189,36 @@ public static void setToZeroWhereZero(int[][] x){
 	}
 	}//if
 }
+
+/* Exercise 1-7 2nd attempt*/
+public static boolean isRotation(String s1, String s2){
+
+// rotation, lengths must be equal
+// Assume capital letters are treated differently to lower case
+// lengths must be more than zero.
+// to start I will ignore isSubstring, then see if it can help at the end.
+
+char[] s1Array = s1.toCharArray();
+char[] s2Array = s2.toCharArray();
+
+for(int i=1; i< s2.length;i++){
+	if(s2[i-1]==s1[s1.length-1] && s2[i]==s1[0]){
+		// potentially I am at the rotation point.
+		char[] subString= new char[s1.length-2];
+		for(int j=i+1; j<s1.length; j++){
+			subString[j-i+1] = s2[j];
+		}
+		for(int j=0; j<i-2; j++){
+			subString[j+s1.length-i-1] = s2[j];// need to test
+		}
+		if(isSubstring(subString, s1)){return true;}
+	}
+}
+
+
+
+return false;
+}
+
+
 }
