@@ -138,4 +138,55 @@ public static void setToZeroWhereZero(int[][] x, int startRow, int startColumn, 
 		}
 	}
 }
+
+/* Exercise 1-7 2nd attempt*/
+// to run call on int[][] x = {{1,1,1,1}{1,0,1,1}{1,1,1,1}{1,1,1,1}{1,1,1,0}};
+// setToZeroWhereZero(x)
+
+public static void setToZeroWhereZero(int[][] x){
+// running time O(mn)+O(m)+O(n) = O(mn)
+// space O(m)+O(n) almost in place
+
+	if(x.length > 0 && x[0].length > 0){/ m and n must be at least 1 row and column
+	// we could do a check to make sure we have rectangle array
+	// we could just return the array if not rectangular, 
+	// or we could work on the smallest length n would need to ask a question
+	// to get min loop through all rows and get min length, then use that instead of x[0].length
+
+	int[] rowBitmap = new int[x.length];
+	int[] columnBitmap = new int[x.[0].length];
+
+	for(int m=0;m<x.length;m++){
+			
+		for(int n=0;n<x[0].length;n++){
+			
+			if(x[m][n]==0){
+				rowBitmap[m] = 1;
+				columnBitmap[n]=1;
+				break;
+								
+			}//if
+			
+		}//for loop
+	}//for loop
+
+	// now lets loop through the row setting all to zero, then through the columns.
+	for(int m=0; m<rowBitmap.length; m++){
+		if(rowBitmap==1){
+			for(int i=0; i<x[m].length;i++){// as we are told it is m by n, this could be 0
+				x[m][i]=0;
+			}
+		}
+	}
+
+	// now lets loop through the row setting all to zero, then through the columns.
+	for(int n=0; n<columnBitmap.length; n++){
+		if(columnBitmap==1){
+			for(int i=0; i<x.length;i++){
+				x[i][n]=0;
+			}
+		}
+	}
+	}//if
+}
 }

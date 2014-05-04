@@ -35,7 +35,7 @@ public class ArraysAndStringsTest {
   public void testSetToZeroWhereZero() {
     int[][] x = {{1,2,3,4},{5,0,7,8},{0,10,11,0},{13,14,15,16}};
     int[][] y = {{0,0,3,0},{0,0,0,0},{0,0,0,0},{0,0,15,0}};
-    ArraysAndStrings.setToZeroWhereZero(x, 0, 0, x[0].length-1);
+    ArraysAndStrings.setToZeroWhereZero(x);
     assertTrue(compareMatrix(x,y));
   }
   
