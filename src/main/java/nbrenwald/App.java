@@ -1,6 +1,7 @@
 package nbrenwald;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 /**
  * Hello world!
@@ -10,10 +11,11 @@ public class App
 {
     public static void main( String[] args )
     {
-        int[][] x = {{1,2,3,4},{5,6,7,8},{9,10,11,12},{13,14,15,16}};
-        printMatrix(x);
-        ArraysAndStrings.rotateSquareMatrix(x,0);
-        printMatrix(x);
+      String s1 = "waterbottle";
+      String s2 = "erbottlewat";
+      String s3 = "rbottlewaet";
+      System.out.println(ArraysAndStrings.isRotation(s1,s2));
+        
     }
     
     private static void printMatrix(int[][] x){

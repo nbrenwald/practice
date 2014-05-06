@@ -1,5 +1,10 @@
 package nbrenwald;
 
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Set;
+
 /* Solutions to Chapter 2, LinkedLists */
 public class LinkedLists{
 /* Pre-req, write own singly and doubly liked list*/
@@ -10,14 +15,14 @@ public class LinkedLists{
 	// simple answer, if possible use an additional collection, such as hashmap to store counts. potentially a 
 	// int array if we know largest int.
 	Set<Integer> set = new HashSet<>();
-	Iterator itList = list.getIterator();
+	Iterator<Integer> itList = list.iterator();
 	while(itList.hasNext()){
 		int value=itList.next();
 		if(set.contains(value)){
 			itList.remove();
 		}
 		else{
-			set.put(value);
+			set.add(value);
 		}
 	}
   }

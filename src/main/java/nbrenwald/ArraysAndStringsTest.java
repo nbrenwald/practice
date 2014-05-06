@@ -42,10 +42,10 @@ public class ArraysAndStringsTest {
 @Test
   public void testIsRotation() {
     String s1 = "waterbottle";
-    String s2 = "erbottlewat"
-    String s3 = "rbottlewaet"
-    assertTrue(ArraysAndString.isRotation(s1,s2));
-    assertFalse(ArraysAndString.isRotation(s1,s3));
+    String s2 = "erbottlewat";
+    String s3 = "rbottlewaet";
+    assertTrue(ArraysAndStrings.isRotation(s1,s2));
+    assertFalse(ArraysAndStrings.isRotation(s1,s3));
   }
   
   private static boolean compareMatrix(int[][]a, int[][] b){
