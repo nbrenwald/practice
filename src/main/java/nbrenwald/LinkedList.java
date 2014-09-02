@@ -2,7 +2,6 @@ package nbrenwald;
 
 public class LinkedList {
   private Node head;
-  private Node end;
   private int length = 0;
 
   public void add(int v) {
@@ -82,6 +81,35 @@ public class LinkedList {
     }
 
 
+  }
+  
+  /*
+   * Exercise 2-1
+   * Return kth to last element from a singly linked list.
+   * If the list contained 10 elements, then returning the last element means returning
+   * the 10th element. Returning the 2nd to last element means returning the 9th element 
+   * i.e. 10 - k -1  
+   */
+  
+  public int returnKFromLast(int v){
+    if(v>length) throw new IllegalArgumentException();
+    Node p1 = head;
+    Node p2 = head;
+    // increment p2 by v-1;
+    for(int i=1; i<v; i++){
+      p2 = p2.next;
+      System.out.println("incrementing p2");
+    }
+    System.out.println("p1 = "+p1.value);
+    System.out.println("p2 = "+p2.value);
+    
+    while(p2.next!=null){
+      p1=p1.next;
+      p2=p2.next;
+      
+    }
+    
+    return p1.value;
   }
 
   @Override
