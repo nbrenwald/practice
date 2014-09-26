@@ -1,10 +1,13 @@
 package nbrenwald;
 
+import java.util.ArrayDeque;
+import java.util.Deque;
+
 public class LinkedList {
   private Node head;
   private int length = 0;
 
-  public void add(int v) {
+  public Node add(int v) {
     Node n = head;
     Node newNode = new Node(v);
     if (n == null) {
@@ -16,6 +19,7 @@ public class LinkedList {
       n.next = newNode;
     }
     length++;
+    return newNode;
   }
 
   public void remove(int v) {
@@ -43,7 +47,7 @@ public class LinkedList {
   }
 
 
-  private class Node {
+  public class Node {
     private int value;
     private Node next;
 
@@ -84,7 +88,7 @@ public class LinkedList {
   }
   
   /*
-   * Exercise 2-1
+   * Exercise 2-2
    * Return kth to last element from a singly linked list.
    * If the list contained 10 elements, then returning the last element means returning
    * the 10th element. Returning the 2nd to last element means returning the 9th element 
@@ -110,6 +114,85 @@ public class LinkedList {
     }
     
     return p1.value;
+  }
+  
+  /* 
+   * Exercise 2-3 
+   * Delete a given node from the list that contains it. 
+   * Copy the value from the next node and update the next pointer to point to the next next node.
+  */
+  public void deleteMember(Node n){
+    n.value=n.next.value;
+    n.next=n.next.next;
+    
+  }
+  
+  /*
+   * Exercise 2-4
+   * Add two numbers stored as a linked list where the least significant digit is at the head.
+   * Basically advance two pointers. Add, if greater than 9 carry 1.
+   */
+  
+  public static LinkedList addLSDLists(LinkedList li1, LinkedList li2){
+    LinkedList result = new LinkedList();
+    Node p1 = li1.head;
+    Node p2 = li2.head;
+    int carry = 0;
+    while(p1 != null || p2 !=null){
+      int a = 0;
+      int b = 0;
+      if(p1 != null) {a = p1.value;p1=p1.next;} 
+      if(p2 != null) {b = p2.value;p2=p2.next;} 
+      int c = a+b+carry;
+      carry = c/10;//(c > 9) ? 1 : 0;
+      result.add(c % 10);
+    }
+    
+    if(carry == 1){ result.add(1);}
+    return result;
+  }
+  
+  
+  /*
+   * Exercise 2-5
+   * Add two numbers stored as a linked list where the Most Significant digit is at the head.
+   * Could reverse the lists. Or, we could either reverse the input, then reverse the output,
+   * or we could use powers of ten(would need to length to know where to start from)
+   * or keep doubly linked list.
+   */
+  
+  /*
+   * Exercise 2-6
+   * Is palindrome
+   * Add first half to a stack, and then pop from stack whilst reading second half.
+   */
+  public boolean isPalindrome(){
+    // stack to hold values from the first half of the stack.
+    Deque<Integer> stack = new ArrayDeque<>(); 
+    
+    // fast and slow runners
+    Node slow = head;
+    Node fast = head;
+    
+    while(fast.next != null && fast.next.next!= null ){
+      stack.add(slow.value);
+      slow=slow.next;
+      fast=fast.next.next;
+    }
+    // slow now either points to the true middle(odd length list), or element before the middle (even length list).
+    if(fast.next!=null){stack.add(slow.value);}
+    // advance slow so that it points to element after the middle.
+    slow=slow.next;
+    
+    // now check slow against stack
+    while(slow!=null){
+      if(slow.value!=stack.peek()) return false;
+      stack.pop();
+      slow= slow.next;
+    }
+    
+    return true;
+    // time O(n) only one pass through the list, space O(n) for the stack
   }
 
   @Override

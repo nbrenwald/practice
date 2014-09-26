@@ -116,12 +116,12 @@ public class ArraysAndStrings {
 public static void setToZeroWhereZero(int[][] x, int startRow, int startColumn, int endColumn){
 // in recursive case, we will always be attempting to go to the final row
 	if(startRow < x.length && startColumn <= endColumn){
-	// if this doesnt hold, then we are either already finished the last row, or left and right matrices are already finished.
+	// if this doesn't hold, then we are either already finished the last row, or left and right matrices are already finished.
 		for(int m=startRow;m<x.length;m++){
 			for(int n=startColumn;n<=endColumn;n++){
 			if(x[m][n]==0){
 				// set all row column 0
-				// call on smaller left matrix and snaller right matrix
+				// call on smaller left matrix and smaller right matrix
 				for(int i=0;i<x.length;i++){// set column 0
 					x[i][n]=0;
 				}
@@ -180,7 +180,6 @@ public static void setToZeroWhereZero(int[][] x){
 
 	// now lets loop through the row setting all to zero, then through the columns.
 	for(int m=0; m<rowBitmap.length; m++){
-	  System.out.println("Row "+m + " value is " + rowBitmap[m]);
 		if(rowBitmap[m]==1){
 			for(int i=0; i<x[m].length;i++){// as we are told it is m by n, this could be 0
 				x[m][i]=0;
@@ -190,7 +189,6 @@ public static void setToZeroWhereZero(int[][] x){
 
 	// now lets loop through the row setting all to zero, then through the columns.
 	for(int n=0; n<columnBitmap.length; n++){
-	  System.out.println("Column "+n + " value is "+columnBitmap[n]);
 		if(columnBitmap[n]==1){
 			for(int i=0; i<x.length;i++){
 				x[i][n]=0;
@@ -202,39 +200,104 @@ public static void setToZeroWhereZero(int[][] x){
 
 /* Exercise 1-7 2nd attempt*/
 public static boolean isRotation(String s1, String s2){
-  /* List of mistakes
-   * 11 - Referred to input string rather than array
-   */
+  // Concatenate S2 to itself. S1 should appear within it.
+  // then test 1 by 1, or perhaps using rolling hash?
 
-// rotation, lengths must be equal
-// Assume capital letters are treated differently to lower case
-// lengths must be more than zero.
-// to start I will ignore isSubstring, then see if it can help at the end.
 
-char[] s1Array = s1.toCharArray();
-char[] s2Array = s2.toCharArray();
-
-for(int i=1; i< s2Array.length;i++){
-	if(s2Array[i-1]==s1Array[s1Array.length-1] && s2Array[i]==s1Array[0]){
-		// potentially I am at the rotation point.
-	    System.out.println(i);
-		char[] subString= new char[s1Array.length-2];
-		for(int j=i+1; j<s1Array.length; j++){
-			subString[j-i+1] = s2Array[j];
-		}
-		for(int j=0; j<i-2; j++){
-			subString[j+s1Array.length-i-1] = s2Array[j];// need to test
-		}
-		System.out.println(s1);
-		System.out.println(s2);
-		System.out.println(subString);
-		if(s1.contains(String.valueOf(subString))){return true;}
-	}
+if(s1.length() != s2.length()) return false;
+else if (s1.length()==0) return true;
+else {
+  char[] s1Array = s1.toCharArray();
+  char[] s2Array = (s2+s2).toCharArray();
+  
+  
+  for(int i = 0; i <s1Array.length;i++){
+    for(int j = 0; j <s1Array.length; j++){
+      if(s1Array[j] != s2Array[i+j]) break;
+      if(j == s1Array.length-1) return true;
+    }
+  }
+}
+  return false;
+  
+//  // make a hash of s1
+//  double pHash = 0;
+//  double sHash = 0;
+//  int base = 10;
+//  int bigPrime = 7919;
+//  
+//  for(int i =0; i< s1Array.length; i++){
+//    System.out.println(Math.pow(base,(s1Array.length-i-1))*s1Array[i]);
+//    System.out.println("length " + (s1Array.length-i-1));
+//    System.out.println("char is " + (s1Array.length-i-1));
+//    pHash = pHash + (Math.pow(base,(s1Array.length-i-1))*Integer..parseInt(s1Array[i]));
+//    sHash += Math.pow(base,(s1Array.length-i-1))*s2Array[i];  
+//  }
+//  //pHash %= bigPrime;
+//  //sHash %= bigPrime;
+//  System.out.println("pHash = "+pHash);
+//  System.out.println("sHash = "+sHash);
+//  
+//  if (sHash == pHash) return true;
+//  
+//  for(int i =1; i <s2Array.length-s1Array.length; i++){
+//    
+//    //we need to subtract
+//    System.out.println("subtract character "+ s2Array[i-1] +" whose numeric value is "+(int)s2Array[i-1]);
+//    System.out.println("subtract "+Math.pow(base,(s1Array.length-1))*s2Array[i-1]);
+//    
+//    sHash = sHash - ((Math.pow(base,(s1Array.length-1))*s2Array[i-1])% bigPrime) ;
+//    sHash = (sHash * base + s2Array[i+s1Array.length-1]) % bigPrime;
+//    //sHash = (sHash - (Math.pow(base,(s1Array.length-1))*s2Array[i-1]))*base + s2Array[i+s1Array.length-1] % bigPrime;
+//    System.out.println("sHash = "+sHash);
+//    if (sHash == pHash) return true;
+//  }
+//}
+//return false;
 }
 
-
-
-return false;
+// p represents the pattern to search for in string t. Naive a approach would require O(pt) as we would check every char of p for every substring of t
+// use Rabin Karp to achieve better results.
+public static boolean isSubstring(String pattern, String text){
+  
+  int base = 10;
+  char[] p = pattern.toCharArray();
+  char[] t = text.toCharArray();
+  double high =Math.pow(base, p.length-1);
+  
+  double pHash =0 ,tHash = 0;
+  // Step 1: make a hash of string p and the first substring of t
+  for(int i = 0; i<p.length; i++){
+    pHash += Math.pow(base, p.length-1-i)* Character.getNumericValue(p[i]);
+    tHash += Math.pow(base, p.length-1-i)* Character.getNumericValue(t[i]);
+  }
+  System.out.println(pHash);
+  System.out.println(tHash);
+  
+  
+  // Step 2: compare the hashes
+  if(pHash == tHash) return true;
+  
+  // Step3: compare all substrings of t
+  for (int i = 1; i<= t.length-p.length; i++){
+    // update rolling hash tHash by removing one char and adding a new one
+    // subtract the leading char
+    tHash = tHash - high*Character.getNumericValue(t[i-1]);
+    System.out.println(tHash);
+    // then shift a digit
+    tHash = tHash * base;
+    System.out.println(tHash);
+    //then add new char
+    tHash = tHash + Character.getNumericValue(t[i+p.length-1]);
+    System.out.println(tHash);
+    // then compare. if we have a match, we then need to do a char by char comparison
+    if(pHash == tHash) return true;
+    
+  }
+  
+  return false;
+ 
+  
 }
 
 
