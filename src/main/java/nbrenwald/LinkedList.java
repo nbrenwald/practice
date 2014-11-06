@@ -208,5 +208,19 @@ public class LinkedList {
     }
     return output;
   }
+  
+  public static void reverse(LinkedList li){
+    if(li.head==null) return;
+    Node current=li.head;
+    Node previous = null;
+    while(current.next != null){
+      Node tmp = current;
+      current = current.next;
+      tmp.next=previous;
+      previous = tmp;
+    }
+    current.next=previous;
+    li.head = current;
+  }
 
 }

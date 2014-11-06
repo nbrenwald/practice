@@ -17,7 +17,7 @@ public class StacksAndQueuesTest {
     s1.push(2);
     s1.push(7);
     s1.push(12);
-    assertEquals((int)s1.min(), 2);
+    assertEquals(2, (int)s1.min());
     
   }
   
@@ -38,7 +38,7 @@ public class StacksAndQueuesTest {
     System.out.println(temp.toString());
     System.out.println(dest.toString());
     System.out.println();
-    assertEquals(dest.toString(), "|54321");
+    assertEquals("|54321", dest.toString());
     
   }
   
@@ -47,19 +47,19 @@ public class StacksAndQueuesTest {
     StackQueue<Integer> queue = new StackQueue<>();
     queue.enQueue(1);
     queue.enQueue(2);
-    assertEquals((int)queue.deQueue(),1);
-    assertEquals((int)queue.deQueue(),2);
+    assertEquals(1, (int)queue.deQueue());
+    assertEquals(2, (int)queue.deQueue());
     assertNull(queue.deQueue());
     assertTrue(queue.isEmpty());
     queue.enQueue(1);
     assertFalse(queue.isEmpty());
     queue.enQueue(2);
-    assertEquals((int)queue.deQueue(),1);
+    assertEquals(1, (int)queue.deQueue());
     queue.enQueue(3);
     queue.enQueue(4);
-    assertEquals((int)queue.deQueue(),2);
-    assertEquals((int)queue.deQueue(),3);
-    assertEquals((int)queue.deQueue(),4);
+    assertEquals(2, (int)queue.deQueue());
+    assertEquals(3, (int)queue.deQueue());
+    assertEquals(4, (int)queue.deQueue());
   }
   
   @Test

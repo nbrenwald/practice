@@ -14,13 +14,13 @@ public class ArraysAndStringsTest {
 
   @Test
   public void testReplaceSubstring() {
-    assertEquals(ArraysAndStrings.replaceSubstring("a b c    ", "%20", 5), "a%20b%20c");
+    assertEquals("a%20b%20c", ArraysAndStrings.replaceSubstring("a b c    ", "%20", 5));
   }
   
   @Test
   public void testCompress() {
-    assertEquals(ArraysAndStrings.compress("aabbbbc"), "a2b4c1");
-    assertEquals(ArraysAndStrings.compress("aabbc"), "aabbc");
+    assertEquals("a2b4c1", ArraysAndStrings.compress("aabbbbc"));
+    assertEquals("aabbc", ArraysAndStrings.compress("aabbc"));
   }
   
   @Test

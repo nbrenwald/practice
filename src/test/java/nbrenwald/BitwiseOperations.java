@@ -2,6 +2,11 @@ package nbrenwald;
 
 import static org.junit.Assert.*;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Random;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -48,8 +53,66 @@ public class BitwiseOperations {
 
   @Test
   public void testFindMissingValue(){
-    int[] n = {0,1,2,3,4,5,6,7,8,9,10,11,12,14,15,16,17,18,19,20,21};
-    BinaryUtils.findMissingValue(n);
-    assertEquals(13, n);
+    int size =  100000000;
+    int[] a = new int[size];
+    for(int i = 0; i< size ; i++){
+      a[i] = i;
+    }
+    a[size/2] = size+1;
+    
+Random r = new Random();
+    
+    
+    for(int i =0; i < 1000000; i++){
+      int first = r.nextInt(size);
+      int second = r.nextInt(size);
+      int tmp =a[first];
+      a[first] = a[second];
+      a[second] = tmp;
+      
+    }
+    
+    long start = System.currentTimeMillis();
+    assertEquals(size/2, BinaryUtils.findMissingValue(a));
+    System.out.println((System.currentTimeMillis()-start)/1000.0);
+    
+    
+  }
+  
+  @Test
+  public void testFindMissingValueUsingSort(){
+    
+    int size =  100000000; //100mn
+    int[] a = new int[size];
+    for(int i = 0; i< size ; i++){
+      a[i] = i;
+    }
+    a[size/2] = size+1;
+    
+    Random r = new Random();
+    
+    
+    for(int i =0; i < 1000000; i++){
+      int first = r.nextInt(size);
+      int second = r.nextInt(size);
+      int tmp =a[first];
+      a[first] = a[second];
+      a[second] = tmp;
+      
+    }
+    
+    
+    
+    
+    long start = System.currentTimeMillis();
+    assertEquals(size/2, BinaryUtils.findMissingValueUsingSort(a));
+    System.out.println((System.currentTimeMillis()-start)/1000.0);
+  }
+  
+  @Test
+  public void testDrawHorizontalLine(){
+    byte[] screen = {0,0,0,0,0,0,0,0,0};
+    BinaryUtils.drawHorizontalLine(screen, 24, 10, 6, 0);
+    assertTrue(true);
   }
 }

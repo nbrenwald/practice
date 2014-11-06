@@ -128,5 +128,51 @@ public class TreesAndGraphs {
     
   }
   
+  @Test
+  public void testIsPath(){
+    Graph g = new Graph();
+    g.addEdge(1, 2,1);
+    g.addEdge(2, 3, 2);
+    g.addEdge(3, 4, 3);
+    g.addEdge(3, 5, 4);
+    g.addEdge(4, 5, 5);
+    g.addEdge(2, 5, 3);
+    g.addEdge(1, 5, 2);
+    
+    assertTrue(g.isPath(1, 4));
+    assertFalse(g.isPath(6, 1));
+    assertFalse((new Graph()).isPath(1, 2));
+  }
+  
+  @Test
+  public void testPrimsMST(){
+    Graph g = new Graph();
+    g.addEdge(1, 2, 1);
+    g.addEdge(2, 3, 2);
+    g.addEdge(3, 5, 4);
+    g.addEdge(5, 4, 5);
+    g.addEdge(2, 5, 3);
+    g.addEdge(1, 5, 2);
+    assertEquals(10, g.primsMST());
+    
+    g.addEdge(3, 4, 3);
+    assertEquals(8, g.primsMST());
+  }
+  
+  @Test
+  public void testShortestPath(){
+    Graph g = new Graph();
+    g.addEdge(1, 2, 1);
+    g.addEdge(2, 3, 2);
+    g.addEdge(3, 5, 4);
+    g.addEdge(5, 4, 5);
+    g.addEdge(2, 5, 3);
+    g.addEdge(1, 5, 2);
+    g.addEdge(3, 4, 3);
+    assertEquals(6, g.shortestPathDijkstra(1, 4));
+    
+    
+  }
+  
   
 }
